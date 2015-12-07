@@ -1,0 +1,17 @@
+{% extends "::layout.html.twig" %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="css/style.css" />
+{%endblock%}
+
+{% block title %} {{parent()}} - Blog{% endblock %}
+
+{% block body %}
+
+    <h2>Blog</h2>
+    {% block contenu %}
+
+    {%endblock%}
+{%endblock%}
+

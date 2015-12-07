@@ -1,0 +1,8 @@
+{% extends "::layout_appbundle.html.twig" %}
+
+{% block title %}{{parent()}} - Modifier {% endblock %}
+
+{% block contenu %}
+    <p>Modifier l'article numéro {{ id }}</p>
+    {%include'blog/formulaire.html.twig'%}
+{% endblock %}
