@@ -2,6 +2,34 @@
 
 {% block title %}{{parent()}} - Article {% endblock %}
 
+{% block  stylesheet %}
+    {{parent()}}
+    <style>
+        article img{
+            width:280px;
+            float:left;
+            margin-right:10px
+        }
+    </style>
+{%endblock%}
+
 {% block contenu %}
-    <h3>Article numéro {{ id }}</h3>
+
+    <article>
+        <h3>{{article.titre}}</h3>
+        <p class="well">
+            {% if article.image is not null %}<img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />{%endif%}{{article.contenu|raw}}
+            <br/><br/><i>Le {{article.date|date("d/m/Y")}}</i></p>
+
+    </article>
+    <div><ul>
+            {% for commentaire in commentaires %}
+                <li>Le {{commentaire.date|date('d/m/Y')}}
+                {% else %}
+
+                {% endfor %}
+        </ul>
+    </div>
+
+
 {% endblock %}
