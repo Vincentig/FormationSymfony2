@@ -1,5 +1,16 @@
 {% extends "::layout_appbundle.html.twig" %}
 
+{% block  stylesheet %}
+    {{parent()}}
+    <style>
+        article img{
+            width:280px;
+            float:left;
+            margin-right:10px
+        }
+    </style>
+{%endblock%}
+
 {% block title %}{{parent()}} - Accueil {% endblock %}
 
 {% block contenu %}
@@ -8,8 +19,10 @@
     {% for article in articles %}
         <article >
             <h3>{{article.titre}}</h3>
-            <p class="well">{{article.contenu|raw}}</p>
-
+            <p class="well">
+                {% if article.image is not null %}<img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />{%endif%}{{article.contenu|raw}}
+                <br/><br/><i>Le {{article.date|date("d/m/Y")}}</i></p>
+            <a href="{{ path('blog_article', {'id':article.id}) }}" class="btn btn-default">Lire ></a>
         </article>
         <hr/>
     {%else%}
