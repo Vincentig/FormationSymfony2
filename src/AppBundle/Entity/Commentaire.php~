@@ -45,14 +45,10 @@ class Commentaire {
     /**
      *
      * @var \AppBundle\Entity\Article 
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
-
-    function __construct() {
-        $this->date = new \DateTime();
-    }
 
     /**
      * Get id
@@ -127,28 +123,6 @@ class Commentaire {
      */
     public function getAuteur() {
         return $this->auteur;
-    }
-
-    /**
-     * Set article
-     *
-     * @param \AppBundle\Entity\Article $article
-     *
-     * @return Commentaire
-     */
-    public function setArticle(\AppBundle\Entity\Article $article) {
-        $this->article = $article;
-
-        return $this;
-    }
-
-    /**
-     * Get article
-     *
-     * @return \AppBundle\Entity\Article
-     */
-    public function getArticle() {
-        return $this->article;
     }
 
 }

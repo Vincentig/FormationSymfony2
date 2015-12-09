@@ -11,6 +11,22 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
             <link rel="stylesheet" href="{{asset('css/starter.css')}}" />
+            <style>
+                #top-link-block.affix-top {
+                    display: none; /* for pages shorter than the viewport */
+                }
+                #top-link-block.affix {
+                    position: absolute; /* allows it to "slide" up into view */
+                    bottom: -82px;
+                    left: 10px;
+                }
+                #top-link-block.affix-bottom {
+                    position: fixed; /* keeps it on the bottom once in view */
+                    bottom: 18px;
+                    left: 10px;
+                }
+
+            </style>
         {% endblock %}
         <title>{% block title %}Exercice{%endblock%}</title>
     </head>
@@ -53,9 +69,14 @@
             </div>
         </div>
 
-
+        <footer id="footer">@ {{ 'now'|date('Y') }} VB </footer>
     </div><!-- /.container -->
 
+    <span id="top-link-block">
+        <a href="#top" class="well well-sm">
+            <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+        </a>
+    </span>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -63,6 +84,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.ckeditor.com/4.5.5/basic/ckeditor.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+        $('#top-link-block').affix({
+            offset: {
+                top: 82, // point were link should start sliding into view
+                bottom: $(document).height() - 100 // link should "pin" to bottom
+            }
+        });
+    </script>
 
 </body>
 </html>

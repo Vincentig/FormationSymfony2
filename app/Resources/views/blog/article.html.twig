@@ -21,15 +21,25 @@
             {% if article.image is not null %}<img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />{%endif%}{{article.contenu|raw}}
             <br/><br/><i>Le {{article.date|date("d/m/Y")}}</i></p>
 
+        {% for categorie in article.categories %}
+            <a href="{{path("blog_categorie", {"titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>
+        {% else %}
+        {%  endfor %}
     </article>
-    <div><ul>
-            {% for commentaire in commentaires %}
-                <li>Le {{commentaire.date|date('d/m/Y')}}
+    {% if article.commentaires  %}
+        <div id="commentaire">
+            <h3>Commentaires</h3>
+            <ul>
+                {% for commentaire in article.commentaires %}
+                    <li>
+                        <i>Le {{commentaire.date|date('d/m/Y \à H:i:s')}} par {{ commentaire.auteur }}</i>
+                        <p class="well">{{ commentaire.contenu }}</p>
+                    </li>
                 {% else %}
 
                 {% endfor %}
-        </ul>
-    </div>
-
+            </ul>
+        </div>
+    {% endif %}
 
 {% endblock %}

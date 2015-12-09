@@ -1,0 +1,21 @@
+{% extends "::layout_appbundle.html.twig" %}
+
+
+
+{% block title %}{{parent()}} - Categorie {% endblock %}
+
+{% block contenu %}
+
+    <h2>{{ categorie.titre }}</h2>
+
+    {% for article in categorie.articles %}
+        <a class="btn btn-default" href="{{ path('blog_article', {'id':article.id}) }}">{{article.titre}}</a>
+
+
+    {%else%}
+        <p class="alert alert-warning">Ancun article trouvé.</p>
+    {%endfor%}
+
+
+
+{% endblock %}
