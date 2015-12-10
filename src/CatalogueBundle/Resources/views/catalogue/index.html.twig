@@ -1,0 +1,19 @@
+{% extends "CatalogueBundle::layout_cataloguebundle.html.twig" %}
+
+
+{% block title %}{{parent()}} - Catalogue {% endblock %}
+
+{% block contenu %}
+
+    {%for categorie in categories%}
+        <article class="col-md-4 col-sm-6">
+            <p><a href="{{path('catalogue_catagorie',{'id':categorie.id}) }}">{{categorie.titre}}</a></p>
+            <p><img width="100%" src="{{asset('images/catalogue/categorie/' ~ categorie.image.url)}}"/></p>
+            <p>{{categorie.description}}</p>
+        </article>
+    {%endfor%}
+
+
+
+
+{% endblock %}

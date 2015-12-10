@@ -32,7 +32,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
-    public function getArticles($nombreParPage, $page) {
+    public function getArticles() {
         $date = new \DateTime();
         $annee = $date->format('Y');
         $qb = $this->createQueryBuilder('a')

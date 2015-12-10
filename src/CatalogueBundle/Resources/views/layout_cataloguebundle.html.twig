@@ -5,12 +5,12 @@
     <link rel="stylesheet" href="css/style.css" />
 {%endblock%}
 
-{% block bundle %} {{parent()}} Blog{% endblock %}
+{% block bundle %} {{parent()}} Catalogue{% endblock %}
 
-{% block title %} {{parent()}} - Blog{% endblock %}
+{% block title %} {{parent()}} - Catalogue{% endblock %}
 
 {% block menu %}
-    {{ render(controller("AppBundle:Blog:menuGauche", {'nombre':3})) }}
+    {{ render(controller("CatalogueBundle:Catalogue:menuGauche", {'nombre':3})) }}
 {% endblock %}
 
 {% block body %}

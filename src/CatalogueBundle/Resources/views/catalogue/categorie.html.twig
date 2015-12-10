@@ -1,0 +1,21 @@
+{% extends "CatalogueBundle::layout_cataloguebundle.html.twig" %}
+
+{% block contenu %}
+    <section>
+        <h1>{{categorie.titre}}</h1>
+        <img width="250" src="{{asset('images/catalogue/categorie/' ~ categorie.image.url)}}"/>
+    </section>
+    <section class="">
+        {% for produit in categorie.produits %}
+            <article class="col-md-4 col-sm-6">
+                <p><a href="{{path('catalogue_produit',{'id':produit.id})}}">{{produit.nom}}</a> {%if produit.evaluation%}note : {{produit.evaluation.note}}{%endif%}</p>
+                <p><img width="100%" src="{{asset('images/catalogue/produit/' ~ produit.image.url)}}"/></p>                
+                <p>Mis en vente le {{produit.date|date('d/m/Y')}}</p>
+                <p>{{produit.prix}} €</p>
+
+            </article>
+        {% else %}
+            <p class="alert alert-warning">Ancun produit dans cette catégorie.</p>
+        {% endfor %}
+    </section>
+{% endblock%}
