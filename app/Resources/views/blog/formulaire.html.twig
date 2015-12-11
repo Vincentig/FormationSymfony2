@@ -1,1 +1,24 @@
-Ici le formulaire
+{% form_theme form '/blog/bootstrap_3_layout.html.twig' %}
+
+<div class="well">
+    {{form_start(form)}}
+
+    {# tout d'un coup #
+        {# {{form_widget(form)}}
+    {# ou ligne par ligne #}
+
+    {#    
+        {{ form_row(form.titre) }}<hr/>
+        {{ form_row(form.contenu) }}<hr/>
+    #}    
+
+    {# ou  #}
+    {{form_label(form.titre,"Titre de l'article") }}
+    {{form_widget(form.titre)}} 
+    {{form_errors(form.titre) }}
+
+    {{form_label(form.contenu,"Contenu de l'article") }}
+    {{form_widget(form.contenu, {'attr': {'class': 'ckeditor'}})}} 
+    {{form_errors(form.contenu) }}
+    {{form_end(form)}}
+</div>
