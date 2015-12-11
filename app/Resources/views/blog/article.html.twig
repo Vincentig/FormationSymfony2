@@ -22,9 +22,9 @@
             <br/><br/><i>Le {{article.date|date("d/m/Y")}}</i></p>
 
         {% for categorie in article.categories %}
-            <a href="{{path("blog_categorie", {"titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>
-        {% else %}
-        {%  endfor %}
+            <a href="{{path("blog_categorie", { "titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>
+            {% else %}
+            {%  endfor %}
     </article>
     {% if article.commentaires  %}
         <div id="commentaire">

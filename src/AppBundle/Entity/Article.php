@@ -76,6 +76,9 @@ class Article {
      */
     private $commentaires;
 
+    const NBARTICLESPAGE = 2;
+    const NBARTICLESPAGECATEGORIE = 4;
+
     function __construct() {
         $this->publication = true;
         $this->date = new \DateTime();

@@ -29,8 +29,8 @@
                 <br/><br/><i>Le {{article.date|date("d/m/Y")}} par {{article.auteur}}</i></p>
             <p>{% for categorie in article.categories %}
                 <a href="{{path("blog_categorie", {"titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>
-            {% else %}
-            {%  endfor %}
+                {% else %}
+                {%  endfor %}
         </p>
         <a href="{{ path('blog_article', {'id':article.id}) }}" class="btn btn-default">Lire <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
         <a href="{{ path('blog_modifier', {'id':article.id}) }}" class="btn btn-default">Modifier <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
@@ -43,6 +43,28 @@
         <p class="alert alert-warning">Ancun article trouvé.</p>
         {%endfor%}
 
-
-
+            {% if nbPage >1 %}
+                <div class="col-sm-12 text-center" ><nav>
+                        <ul class="pagination" >
+                            {%if page>1%}
+                                <li>
+                                    <a href="{{path('blog_homepage', {'page':page-1})}}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            {%endif%}
+                            {% for i in 1..nbPage %}
+                                <li {%if page == i%}class="active"{%endif%}><a  href="{{path('blog_homepage', {'page':i})}}">{{i}}</a></li>
+                                {% endfor %}
+                                {%if page<nbPage%}
+                                <li>
+                                    <a href="{{path('blog_homepage', {'page':page+1})}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {%endif%}
+                        </ul>
+                    </nav>
+                </div>
+            {%endif%}
             {% endblock %}

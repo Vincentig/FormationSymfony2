@@ -24,8 +24,18 @@ class BlogController extends Controller {
         $articleManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Article');
 //        $articles = $articleManager->findAll();
         // $articles = $articleManager->findBy(array('publication' => true), array('date' => 'desc'), null, null);
-        $articles = $articleManager->getArticles();
 
+        $nbParPage = \AppBundle\Entity\Article::NBARTICLESPAGE;
+
+        $articles = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Article')
+                ->getArticles($nbParPage, $page);
+
+
+        $nbPages = ceil(count($articles) / $nbParPage);
+
+        // $articles = $articleManager->getArticles();
 //        $articles = [
 //            ['id' => 1, 'titre' => 'Le titre', 'contenu' => 'Blablabla <b>bliblibli</b>'],
 //            ['id' => 2, 'titre' => 'L\'autre titre', 'contenu' => 'le contenu de l\autre article'],
@@ -34,7 +44,8 @@ class BlogController extends Controller {
 
         return $this->render('blog/index.html.twig', array(
                     'articles' => $articles,
-                    'page' => $page
+                    'page' => $page,
+                    'nbPage' => $nbPages
         ));
     }
 
@@ -180,18 +191,33 @@ Ut eu ex euismod, vehicula mi nec, porta arcu. Fusce cursus porta lacinia. Vesti
     }
 
     /**
-     * @Route("/categorie/{titre}",
+     * @Route("/categorie/{titre}/{page}",
      *      name="blog_categorie", 
-     *      requirements={"titre": ".+"})
+     *      requirements={"titre": "\w+", "page": "\d+"},
+     *      defaults={"page":1})
      */
-    public function categorieAction($titre) {
-        $categorieManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie');
-        $categorie = $categorieManager->findOneBy(array('titre' => $titre), null, null, null);
+    public function categorieAction($titre, $page) {
+//        $categorieManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie');
+//        $categorie = $categorieManager->findOneBy(array('titre' => $titre));
+//
+//        $nbParPage = \AppBundle\Entity\Article::NBARTICLESPAGECATEGORIE;
+//        var_dump(count($categorie->getArticles()));
+//        $nbPages = ceil(count($categorie->getArticles()) / $nbParPage);
+
+        $categorie = $this->getDoctrine()->getManager()->getRepository('AppBundle:Categorie')->findOneBy(array('titre' => $titre));
+
+        $nbParPage = \AppBundle\Entity\Article::NBARTICLESPAGECATEGORIE;
+
+        $articleManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Article');
+        $articles = $articleManager->getArticlesByCategorie($nbParPage, $page, $titre);
+        $nbPages = ceil(count($articles) / $nbParPage);
 
 
-        // replace this example code with whatever you need
         return $this->render('blog/categorie.html.twig', array(
-                    'categorie' => $categorie
+                    'articles' => $articles,
+                    'categorie' => $categorie,
+                    'page' => $page,
+                    'nbPage' => $nbPages
         ));
     }
 

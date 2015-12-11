@@ -8,13 +8,64 @@
 
     <h2>{{ categorie.titre }}</h2>
 
-    {% for article in categorie.articles %}
+    {% for article in articles %}
         <a class="btn btn-default" href="{{ path('blog_article', {'id':article.id}) }}">{{article.titre}}</a>
 
 
     {%else%}
         <p class="alert alert-warning">Ancun article trouvé.</p>
     {%endfor%}
+    {#
+        {% if nbPage >1 %}
+            <div class="col-sm-12 text-center" ><nav>
+                    <ul class="pagination" >
+                        {%if page>1%}
+                            <li>
+                                <a href="{{path('blog_categorie', {'titre':categorie.titre,  'page':page-1})}}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        {%endif%}
+                        {% for i in 1..nbPage %}
+                            <li {%if page == i%}class="active"{%endif%}><a  href="{{path('blog_categorie', {'titre':categorie.titre, 'page':i})}}">{{i}}</a></li>
+                            {% endfor %}
+                            {%if page<nbPage%}
+                            <li>
+                                <a href="{{path('blog_categorie', {'titre':categorie.titre, 'page':page+1})}}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        {%endif%}
+                    </ul>
+                </nav>
+            </div>
+        {%endif%}#}
+
+
+    {% if nbPage >1 %}
+        <div class="col-sm-12 text-center" ><nav>
+                <ul class="pagination" >
+                    {%if page>1%}
+                        <li>
+                            <a href="{{path('blog_categorie', {'titre':categorie.titre, 'page':page-1})}}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {%endif%}
+                    {% for i in 1..nbPage %}
+                        <li {%if page == i%}class="active"{%endif%}><a  href="{{path('blog_categorie', {'titre':categorie.titre,'page':i})}}">{{i}}</a></li>
+                        {% endfor %}
+                        {%if page<nbPage%}
+                        <li>
+                            <a href="{{path('blog_categorie', {'titre':categorie.titre, 'page':page+1})}}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+    {%endif%}
 
 
 

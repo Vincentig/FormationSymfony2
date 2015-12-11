@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use \Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * ArticleRepository
  *
@@ -32,7 +34,10 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository {
         return $query->getResult();
     }
 
-    public function getArticles() {
+    public function getArticles($nbParPage, $page) {
+
+
+
         $date = new \DateTime();
         $annee = $date->format('Y');
         $qb = $this->createQueryBuilder('a')
@@ -44,9 +49,32 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository {
                 ->setParameter('publication', 1)
                 ->andWhere('a.date >= :annee')
                 ->setParameter('annee', $annee)
-                ->orderBy('a.date', 'DESC');
-        $query = $qb->getQuery();
-        return $query->getResult();
+                ->orderBy('a.date', 'DESC')
+                ->setFirstResult(($page - 1) * $nbParPage)
+                ->setMaxResults($nbParPage);
+
+        //$query = $qb->getQuery();
+        //return $query->getResult();
+        return new Paginator($qb);
+    }
+
+    public function getArticlesByCategorie($nbParPage, $page, $titre) {
+
+        $date = new \DateTime();
+        $annee = $date->format('Y');
+        $qb = $this->createQueryBuilder('a')
+                ->leftJoin('a.categories', 'c')
+                ->addSelect('c')
+                ->Where('a.publication = :publication')
+                ->setParameter('publication', 1)
+                ->andWhere('c.titre = :titre')
+                ->setParameter('titre', $titre)
+                ->setFirstResult(($page - 1) * $nbParPage)
+                ->setMaxResults($nbParPage);
+
+        //$query = $qb->getQuery();
+        //return $query->getResult();
+        return new Paginator($qb);
     }
 
 }
