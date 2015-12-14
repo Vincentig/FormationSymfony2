@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * prefix blog
@@ -36,7 +37,10 @@ class BlogController extends Controller {
                 ->getManager()
                 ->getRepository('AppBundle:Article')
                 ->getArticles($nbParPage, $page);
-
+        $extrait = $this->get('app_extrait');
+        foreach ($articles as $key => $article) {
+            $article->setExtrait($extrait->extraire($article->getContenu()));
+        }
 
         $nbPages = ceil(count($articles) / $nbParPage);
 
@@ -135,9 +139,9 @@ class BlogController extends Controller {
          */
 
         $article = new Article();
-        $formB = $this->createFormBuilder($article);
-        //ancienne methode
-        /*     $formB->add('titre')
+        /*       $formB = $this->createFormBuilder($article);
+          //ancienne methode
+          /*     $formB->add('titre')
           ->add('contenu', 'textarea')
           ->add('auteur', 'text')
           ->add('publication', 'checkbox')
@@ -145,16 +149,44 @@ class BlogController extends Controller {
           ->add('ok', 'submit');
          */
         //nouvelle methode
-        $formB->add('titre', TextType::class)
-                ->add('contenu', TextareaType::class)
-                ->add('auteur', TextType::class)
-                ->add('publication', CheckboxType::class)
-                ->add('date', DateType::class)
-                ->add('ok', SubmitType::class);
+        /*      $formB->add('titre', TextType::class)
+          ->add('contenu', TextareaType::class)
+          ->add('auteur', TextType::class)
+          ->add('publication', CheckboxType::class)
+          ->add('date', DateType::class)
+          ->add('ok', SubmitType::class);
 
-        $form = $formB->getForm();
+          $form = $formB->getForm();
+         */
 
 
+
+
+// add flash messages
+
+
+
+        $form = $this->createForm(new \AppBundle\Form\ArticleType(), $article);
+
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $session = $this->get('session');
+                try {
+                    $em->flush();
+                    $session->getFlashBag()->add(
+                            'info', 'Article enregistré'
+                    );
+                    $url = $this->generateUrl('blog_article', array('id' => $article->getId()));
+                    return $this->redirect($url);
+                } catch (Exception $ex) {
+                    echo 'erreur enregistrement article';
+                }
+            }
+        }
 
         return $this->render('blog/ajouter.html.twig', array(
                     'form' => $form->createView()
@@ -167,22 +199,33 @@ class BlogController extends Controller {
      *      requirements={"id": "\d+"})
      */
     public function modifierAction($id) {
-
         $em = $this->getDoctrine()->getManager();
+
         $article = $em->getRepository('AppBundle:Article')->find($id);
-        $article->setTitre($article->getTitre() . ' - Modifié');
-        try {
-            $em->flush();
-        } catch (Exception $ex) {
-            echo $ex;
+
+        $form = $this->createForm(new \AppBundle\Form\ArticleType(), $article);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $session = $this->get('session');
+                try {
+                    $em->flush();
+                    $session->getFlashBag()->add(
+                            'info', 'Article modifié'
+                    );
+                    $url = $this->generateUrl('blog_article', array('id' => $article->getId()));
+                    return $this->redirect($url);
+                } catch (Exception $ex) {
+                    echo 'erreur enregistrement article';
+                }
+            }
         }
 
-        /* return $this->render('blog/modifier.html.twig', array(
-          'article' => $article
-          )); */
-        $url = $this->generateUrl('blog_article', array('id' => $id));
-
-        return $this->redirect($url);
+        return $this->render('blog/ajouter.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
 
     /**
@@ -193,10 +236,25 @@ class BlogController extends Controller {
     public function supprimerAction($id) {
 
 
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository('AppBundle:Article')->find($id);
+        $em->remove($article);
 
-        return $this->render('blog/supprimer.html.twig', array(
-                    'id' => $id
-        ));
+        try {
+            $em->flush();
+        } catch (Exception $ex) {
+            echo $ex;
+        }
+
+        /* return $this->render('blog/modifier.html.twig', array(
+          'article' => $article
+          )); */
+        $url = $this->generateUrl('blog_homepage');
+
+        return $this->redirect($url);
+//        return $this->render('blog/supprimer.html.twig', array(
+//                    'id' => $id
+//        ));
     }
 
     /**

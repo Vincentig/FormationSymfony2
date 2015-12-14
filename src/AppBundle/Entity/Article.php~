@@ -76,10 +76,19 @@ class Article {
      */
     private $commentaires;
 
+    /*
+     * 
+     */
+    private $extrait;
+
+    const NBARTICLESPAGE = 4;
+    const NBARTICLESPAGECATEGORIE = 4;
+
     function __construct() {
         $this->publication = true;
         $this->date = new \DateTime();
         $this->categories = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     /**
@@ -252,6 +261,39 @@ class Article {
      */
     public function getCategories() {
         return $this->categories;
+    }
+
+    /**
+     * Add commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Article
+     */
+    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire) {
+
+        $commentaire->setArticle($this);
+        $this->commentaires[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire) {
+        $this->commentaires->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaires() {
+        return $this->commentaires;
     }
 
 }

@@ -3,26 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Resources/views/catalogue/index.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/formulaire.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Article.php</file>
             <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/article.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Repository/CategorieRepository.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Entity/Categorie.php</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/categorie.html.twig</file>
             <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/BlogController.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Entity/Image.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Repository/ProduitRepository.php</file>
             <file>file:/C:/wamp/www/symfony/src/AppBundle/Repository/ArticleRepository.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Entity/Produit.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Resources/views/catalogue/categorie.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Controller/CategorieController.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_appbundle.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Controller/CatalogueController.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Controller/ProduitController.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Resources/views/catalogue/menu_gauche.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/AppKernel.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/Layout.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Resources/views/layout_cataloguebundle.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Entity/Evaluation.php</file>
-            <file>file:/C:/wamp/www/symfony/src/CatalogueBundle/Resources/views/catalogue/produit.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/index.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Repository/CategorieRepository.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Categorie.php</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/ajouter.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/bootstrap_3_layout.html.twig</file>
         </group>
     </open-files>
 </project-private>

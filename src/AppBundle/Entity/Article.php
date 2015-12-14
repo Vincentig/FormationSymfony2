@@ -76,8 +76,13 @@ class Article {
      */
     private $commentaires;
 
-    const NBARTICLESPAGE = 2;
-    const NBARTICLESPAGECATEGORIE = 4;
+    /*
+     * 
+     */
+    private $extrait;
+
+    const NBARTICLESPAGE = 6;
+    const NBARTICLESPAGECATEGORIE = 8;
 
     function __construct() {
         $this->publication = true;
@@ -289,6 +294,28 @@ class Article {
      */
     public function getCommentaires() {
         return $this->commentaires;
+    }
+
+    /**
+     * Set titre
+     *
+     * @param string $extrait
+     *
+     * @return Article
+     */
+    public function setExtrait($extrait) {
+        $this->extrait = $extrait;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getExtrait() {
+        return $this->extrait;
     }
 
 }

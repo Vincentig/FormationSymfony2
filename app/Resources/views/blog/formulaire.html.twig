@@ -13,12 +13,16 @@
     #}    
 
     {# ou  #}
-    {{form_label(form.titre,"Titre de l'article") }}
-    {{form_widget(form.titre)}} 
-    {{form_errors(form.titre) }}
+    <div class="form-group">
+        {{form_label(form.titre,"Titre de l'article") }}
+        <div class="col-sm-10">{{form_widget(form.titre ) }} </div>
+        {{form_errors(form.titre) }}
+    </div>
 
-    {{form_label(form.contenu,"Contenu de l'article") }}
-    {{form_widget(form.contenu, {'attr': {'class': 'ckeditor'}})}} 
-    {{form_errors(form.contenu) }}
+    <div class="form-group">
+        {{form_label(form.contenu,"Contenu de l'article" ) }}
+        <div class="col-sm-10">{{form_widget(form.contenu, {'attr': {'class': 'ckeditor'}} )}} </div>
+        {{form_errors(form.contenu) }}
+    </div>
     {{form_end(form)}}
 </div>

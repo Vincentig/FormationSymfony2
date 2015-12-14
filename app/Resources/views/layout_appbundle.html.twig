@@ -3,7 +3,18 @@
 {% block stylesheet %}
     {{ parent() }}
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+
+        article img{
+            max-width:280px;
+            width:100%;
+            float:left;
+            margin-right:10px
+        }
+    </style>
 {%endblock%}
+
+
 
 {% block bundle %} {{parent()}} Blog{% endblock %}
 
@@ -15,7 +26,12 @@
 
 {% block body %}
 
-
+    {% for message in app.session.flashbag.get('info') %}
+        <p class="alert alert-success">{{message}}</p>
+    {%endfor%}
+    {% for message in app.session.flashbag.get('erreur') %}
+        <p class="alert alert-danger">{{message}}</p>
+    {%endfor%}
     {% block contenu %}
 
     {%endblock%}

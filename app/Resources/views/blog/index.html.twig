@@ -1,22 +1,12 @@
 {% extends "::layout_appbundle.html.twig" %}
 
-{% block  stylesheet %}
-    {{parent()}}
-    <style>
 
-        article img{
-            width:280px;
-            float:left;
-            margin-right:10px
-        }
-    </style>
-{%endblock%}
 
 {% block title %}{{parent()}} - Accueil {% endblock %}
 
 {% block contenu %}
 
-    <p>Accueil Page : {{ page }}</p>
+
 
     {% for article in articles %}
         <article class="col-sm-6" >
@@ -25,7 +15,7 @@
                 {% if article.image is not null %}
                     <img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />
                 {%endif%}
-                {{article.contenu|raw}}
+                {{article.extrait|raw}}
                 <br/><br/><i>Le {{article.date|date("d/m/Y")}} par {{article.auteur}}</i></p>
             <p>{% for categorie in article.categories %}
                 <a href="{{path("blog_categorie", {"titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>
