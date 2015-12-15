@@ -9,3 +9,5 @@ services:
         class: AppBundle\Services\Extrait
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
         arguments: ["%longueur_extrait%", "(...)"]
+        tags:
+            - {name: twig.extension}

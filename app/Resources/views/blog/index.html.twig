@@ -15,7 +15,8 @@
                 {% if article.image is not null %}
                     <img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />
                 {%endif%}
-                {{article.extrait|raw}}
+                {#                {{article.extrait|raw}}#}
+                {{extrait(article.contenu)}}
                 <br/><br/><i>Le {{article.date|date("d/m/Y")}} par {{article.auteur}}</i></p>
             <p>{% for categorie in article.categories %}
                 <a href="{{path("blog_categorie", {"titre":categorie.titre})}}"><span class="label label-default">{{ categorie.titre }}</span></a>

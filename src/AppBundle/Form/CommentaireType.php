@@ -5,9 +5,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use \Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ImageType extends AbstractType {
+class CommentaireType extends AbstractType {
 
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +15,9 @@ class ImageType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                //->add('url')
-                ->add('file', \Symfony\Component\Form\Extension\Core\Type\FileType::class, array('required' => false))
-                ->add('alt', null, array('required' => false))
+                ->add('contenu')
+                ->add('auteur')
+                ->add('Ajouter', SubmitType::class)
         ;
     }
 
@@ -26,7 +26,7 @@ class ImageType extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Image'
+            'data_class' => 'AppBundle\Entity\Commentaire'
         ));
     }
 
@@ -34,7 +34,7 @@ class ImageType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'appbundle_image';
+        return 'appbundle_commentaire';
     }
 
 }

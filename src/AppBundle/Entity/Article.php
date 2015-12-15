@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use \Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
  *
  * @ORM\Table(name="article" )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article {
 
@@ -26,6 +28,10 @@ class Article {
      * @var string
      *
      * @ORM\Column(name="titre", type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      minMessage = "Le titre doit contenir au moins {{ limit }} caractères",
+     * )
      */
     private $titre;
 
@@ -40,8 +46,18 @@ class Article {
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime(
+     * message = "date pas bonne")
      */
     private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateModification", type="datetime")
+     * 
+     */
+    private $dateModification;
 
     /**
      * @var string
@@ -62,6 +78,8 @@ class Article {
      * @var \AppBundle\Entity\Image 
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Image", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=true)
+     * 
+     * @Assert\Valid
      *  
      */
     private $image;
@@ -316,6 +334,35 @@ class Article {
      */
     public function getExtrait() {
         return $this->extrait;
+    }
+
+    /**
+     * Set dateModification
+     *
+     * @param \DateTime $dateModification
+     *
+     * @return Article
+     */
+    public function setDateModification($dateModification) {
+        $this->dateModification = $dateModification;
+
+        return $this;
+    }
+
+    /**
+     * Get dateModification
+     *
+     * @return \DateTime
+     */
+    public function getDateModification() {
+        return $this->dateModification;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate() {
+        $this->setDateModification(new \DateTime());
     }
 
 }

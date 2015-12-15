@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use \Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Image {
 
@@ -34,6 +37,59 @@ class Image {
      * @ORM\Column(name="alt", type="string", length=255, nullable=true)
      */
     private $alt;
+
+    /**
+     *
+     * @Assert\Image(
+     * mimeTypesMessage = "Ceci n'est pas une image")
+     */
+    private $file;
+
+    /**
+     * Get file
+     *
+     * @return 
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+    /**
+     * Set file
+     *
+     * @return
+     */
+    public function setFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file = null) {
+        $this->file = $file;
+        return $this;
+    }
+
+    public function upload() {
+        if (null === $this->file) {
+            return;
+        }
+        $name = $this->file->getClientOriginalName();
+        $ext = pathinfo($name, PATHINFO_EXTENSION);
+        $name = md5(uniqid()) . '.' . $ext;
+
+        $this->file->move($this->getUploadRootDir(), $name);
+        $this->url = $name;
+    }
+
+    public function getUploadDir() {
+        // On retourne le chemin relatif vers l'image pour un navigateur
+        return 'images';
+    }
+
+    protected function getUploadRootDir() {
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
+    }
+
+    public function removeOldFile() {
+
+        if (is_file($this->getUploadRootDir() . '/' . $this->url))
+            unlink($this->getUploadRootDir() . '/' . $this->url);
+    }
 
     /**
      * Get id

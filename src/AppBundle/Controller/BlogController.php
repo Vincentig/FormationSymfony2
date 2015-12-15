@@ -67,12 +67,39 @@ class BlogController extends Controller {
         $articleManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Article');
         $article = $articleManager->find($id);
 
+        $commentaire = new \AppBundle\Entity\Commentaire();
+        $form = $this->createForm(new \AppBundle\Form\CommentaireType(), $commentaire);
+
+
+
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $commentaire->setArticle($article);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($commentaire);
+                $session = $this->get('session');
+                try {
+                    $em->flush();
+                    $session->getFlashBag()->add(
+                            'info', 'Commentaire enregistré'
+                    );
+                    $url = $this->generateUrl('blog_article', array('id' => $article->getId()));
+                    return $this->redirect($url);
+                } catch (Exception $ex) {
+                    echo 'erreur enregistrement article';
+                }
+            }
+        }
+
 //        $commentaireManager = $this->getDoctrine()->getManager()->getRepository('AppBundle:Commentaire');
 //        $commentaires = $commentaireManager->findBy(
 //                array('article' => $article), array('date' => 'desc'));
         // replace this example code with whatever you need
         return $this->render('blog/article.html.twig', array(
                     'article' => $article,
+                    'form' => $form->createView()
 //                    'commentaires' => $commentaires
         ));
     }
@@ -172,6 +199,7 @@ class BlogController extends Controller {
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
+                $article->getImage()->upload();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $session = $this->get('session');
@@ -202,12 +230,19 @@ class BlogController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $article = $em->getRepository('AppBundle:Article')->find($id);
+        $image = $article->getImage();
 
         $form = $this->createForm(new \AppBundle\Form\ArticleType(), $article);
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
+
+
+                if ($image->getFile() !== null) {
+                    $image->removeOldFile();
+                    $image->upload();
+                }
                 $em = $this->getDoctrine()->getManager();
                 $session = $this->get('session');
                 try {
@@ -224,7 +259,8 @@ class BlogController extends Controller {
         }
 
         return $this->render('blog/ajouter.html.twig', array(
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'image' => $image
         ));
     }
 
@@ -239,6 +275,8 @@ class BlogController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $article = $em->getRepository('AppBundle:Article')->find($id);
         $em->remove($article);
+
+        $article->getImage()->removeOldFile();
 
         try {
             $em->flush();

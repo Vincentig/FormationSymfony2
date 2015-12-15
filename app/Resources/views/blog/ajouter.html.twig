@@ -1,5 +1,23 @@
 {% extends "::layout_appbundle.html.twig" %}
 
+{%block stylesheet%}
+    {{parent()}}
+    <style>
+        #appbundle_article_image_file{
+            display:inline !important;
+        }
+        #image_miniature{
+            margin-right:10px;
+        }
+    </style>
+{%endblock%}
+
+{%block scriptJjquery%}
+    {{parent()}}
+    $('#image_miniature').insertBefore('#appbundle_article_image_file');
+{%endblock%}
+
+
 {% block title %}{{parent()}} - Ajouter {% endblock %}
 
 {% block contenu %}

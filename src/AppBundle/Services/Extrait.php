@@ -7,7 +7,7 @@ namespace AppBundle\Services;
  *
  * @author hb
  */
-class Extrait {
+class Extrait extends \Twig_Extension {
 
     private $tailleTexte;
     private $suite;
@@ -26,6 +26,27 @@ class Extrait {
 //            $textTemp = 'Extrait ...';
         }
         return $textTemp;
+    }
+
+    /*
+     * Retourne le nom de la classe
+     */
+
+    public function getName() {
+        return 'Extrait';
+    }
+
+    /*
+     * retourne un tableau avec le nom comment va s'appeler la fouction dans twig.
+     */
+
+    public function getFunctions() {
+        return array(
+            new \Twig_SimpleFunction('extrait', array($this, 'extraire'))
+        );
+//        return array(
+//            'extrait' => new \Twig_Function_Method($this, 'extraire')
+//        );
     }
 
 }

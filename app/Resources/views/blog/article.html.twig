@@ -12,7 +12,7 @@
         <h3>{{article.titre}}</h3>
         <div class="well">
             {% if article.image is not null %}<img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />{%endif%}{{article.contenu|raw}}
-            <i>Le {{article.date|date("d/m/Y \à H:i")}} par {{article.auteur}}</i></div>
+            <i>Le {{article.date|date("d/m/Y \à H:i")}} par {{article.auteur}} ( modifié le {{article.dateModification|date("d/m/Y \à H:i")}} )</i></div>
 
 
     </article>
@@ -25,9 +25,13 @@
                 <a href="{{ path('blog_modifier', {'id':article.id}) }}" class="btn btn-default">Modifier <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                 <a href="{{ path('blog_supprimer', {'id':article.id}) }}" class="btn btn-default">Supprimer <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </p>
-            {% if article.commentaires is not empty  %}
-                <div id="commentaire">
+
+            <div id="commentaire">
+
+                {% if article.commentaires is not empty  %}
+
                     <h3>Commentaires</h3>
+
                     <ul>
                         {% for commentaire in article.commentaires %}
                             <li>
@@ -38,7 +42,9 @@
 
                         {% endfor %}
                     </ul>
-                </div>
-            {% endif %}
+
+                {% endif %}
+                {%include':blog:commentaire_formulaire.html.twig'%}
+            </div>
 
             {% endblock %}

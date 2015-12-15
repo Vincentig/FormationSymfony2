@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use \Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use \Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use \Symfony\Component\Form\Extension\Core\Type\TextType;
+use \Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleType extends AbstractType {
 
@@ -18,10 +20,10 @@ class ArticleType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('titre')
-                ->add('contenu')
-                ->add('date', DateTimeType::class, array('widget' => 'single_text'))
-                ->add('auteur')
+                ->add('titre', TextType::class)
+                ->add('contenu', TextareaType::class)
+                ->add('date', DateTimeType::class, array('widget' => 'single_text', 'invalid_message' => 'c\'est pas valide'))
+                ->add('auteur', TextType::class)
                 ->add('publication', CheckboxType::class, array('required' => false))
                 ->add('image', new ImageType())
                 ->add('categories', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, array(
@@ -37,7 +39,7 @@ class ArticleType extends AbstractType {
 //                    return $qb;
 //                    }
                 ))
-                ->add('testNonMapped', \Symfony\Component\Form\Extension\Core\Type\TextType::class, array('required' => false, 'mapped' => false))
+                ->add('testNonMapped', TextType::class, array('required' => false, 'mapped' => false))
                 ->add('ok', SubmitType::class)
         ;
     }
