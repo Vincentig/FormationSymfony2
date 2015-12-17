@@ -1,0 +1,33 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    /*padding: 40px 15px;*/
+}
+
+article{
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    border-width: 1px;
+    box-shadow: none;
+}
+#top-link-block.affix-top {
+    display: none; /* for pages shorter than the viewport */
+}
+#top-link-block.affix {
+    position: absolute; /* allows it to "slide" up into view */
+    bottom: -82px;
+    left: 10px;
+}
+#top-link-block.affix-bottom {
+    position: fixed; /* keeps it on the bottom once in view */
+    bottom: 18px;
+    left: 10px;
+}
+body{
+    background-image: url('../../css/img/body-bg.png');
+}
+
+#body{
+    background-color: #fff;
+}

@@ -3,22 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/formulaire.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/article.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/BlogController.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/ArticleType.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Services/Extrait.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Repository/ArticleRepository.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/index.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Categorie.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/bootstrap_3_layout.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_appbundle.html.twig</file>
             <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Article.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/categorie.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/ImageType.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Repository/CategorieRepository.php</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/ajouter.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/config/services.yml</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/ArticleType.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/BlogController.php</file>
         </group>
     </open-files>
 </project-private>

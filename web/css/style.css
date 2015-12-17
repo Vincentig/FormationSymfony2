@@ -1,0 +1,20 @@
+#top-link-block.affix-top {
+    display: none; /* for pages shorter than the viewport */
+}
+#top-link-block.affix {
+    position: absolute; /* allows it to "slide" up into view */
+    bottom: -82px;
+    left: 10px;
+}
+#top-link-block.affix-bottom {
+    position: fixed; /* keeps it on the bottom once in view */
+    bottom: 18px;
+    left: 10px;
+}
+body{
+    background-image: url('img/body-bg.png');
+}
+
+#body{
+    background-color: #fff;
+}
