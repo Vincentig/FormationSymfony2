@@ -7,44 +7,42 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Categorie;
-use AppBundle\Form\CategorieType;
+use AppBundle\Entity\Article;
+use AppBundle\Form\ArticleType;
 
 /**
- * Categorie controller.
+ * Article controller.
  *
- * @Route("/admin/categorie")
+ * @Route("/admin/article")
  */
-class CategorieController extends Controller {
+class ArticleController extends Controller {
 
     /**
-     * Lists all Categorie entities.
+     * Lists all Article entities.
      *
-     * @Route("/", name="admin_categorie")
+     * @Route("/", name="admin_article")
      * @Method("GET")
      * @Template()
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Categorie')->findAll();
+        $entities = $em->getRepository('AppBundle:Article')->findAll();
 
-
-
-        return $this->render('AppBundle:Categorie:index.html.twig', array(
+        return $this->render('AppBundle:Article:index.html.twig', array(
                     'entities' => $entities,
         ));
     }
 
     /**
-     * Creates a new Categorie entity.
+     * Creates a new Article entity.
      *
-     * @Route("/", name="admin_categorie_create")
+     * @Route("/", name="admin_article_create")
      * @Method("POST")
-     * @Template("AppBundle:Categorie:new.html.twig")
+     * @Template("AppBundle:Article:new.html.twig")
      */
     public function createAction(Request $request) {
-        $entity = new Categorie();
+        $entity = new Article();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +51,7 @@ class CategorieController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_categorie_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_article_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,15 +61,15 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Creates a form to create a Categorie entity.
+     * Creates a form to create a Article entity.
      *
-     * @param Categorie $entity The entity
+     * @param Article $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Categorie $entity) {
-        $form = $this->createForm(new CategorieType(), $entity, array(
-            'action' => $this->generateUrl('admin_categorie_create'),
+    private function createCreateForm(Article $entity) {
+        $form = $this->createForm(new ArticleType(), $entity, array(
+            'action' => $this->generateUrl('admin_article_create'),
             'method' => 'POST',
         ));
 
@@ -81,14 +79,14 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Displays a form to create a new Categorie entity.
+     * Displays a form to create a new Article entity.
      *
-     * @Route("/new", name="admin_categorie_new")
+     * @Route("/new", name="admin_article_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction() {
-        $entity = new Categorie();
+        $entity = new Article();
         $form = $this->createCreateForm($entity);
 
         return array(
@@ -98,19 +96,19 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Finds and displays a Categorie entity.
+     * Finds and displays a Article entity.
      *
-     * @Route("/{id}", name="admin_categorie_show")
+     * @Route("/{id}", name="admin_article_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Categorie')->find($id);
+        $entity = $em->getRepository('AppBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -122,19 +120,19 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Displays a form to edit an existing Categorie entity.
+     * Displays a form to edit an existing Article entity.
      *
-     * @Route("/{id}/edit", name="admin_categorie_edit")
+     * @Route("/{id}/edit", name="admin_article_edit")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Categorie')->find($id);
+        $entity = $em->getRepository('AppBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -148,37 +146,37 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Creates a form to edit a Categorie entity.
+     * Creates a form to edit a Article entity.
      *
-     * @param Categorie $entity The entity
+     * @param Article $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Categorie $entity) {
-        $form = $this->createForm(new CategorieType(), $entity, array(
-            'action' => $this->generateUrl('admin_categorie_update', array('id' => $entity->getId())),
+    private function createEditForm(Article $entity) {
+        $form = $this->createForm(new ArticleType(), $entity, array(
+            'action' => $this->generateUrl('admin_article_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Mettre à jour'));
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
 
     /**
-     * Edits an existing Categorie entity.
+     * Edits an existing Article entity.
      *
-     * @Route("/{id}", name="admin_categorie_update")
+     * @Route("/{id}", name="admin_article_update")
      * @Method("PUT")
-     * @Template("AppBundle:Categorie:edit.html.twig")
+     * @Template("AppBundle:Article:edit.html.twig")
      */
     public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Categorie')->find($id);
+        $entity = $em->getRepository('AppBundle:Article')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Categorie entity.');
+            throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -188,7 +186,7 @@ class CategorieController extends Controller {
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_categorie_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_article_edit', array('id' => $id)));
         }
 
         return array(
@@ -199,9 +197,9 @@ class CategorieController extends Controller {
     }
 
     /**
-     * Deletes a Categorie entity.
+     * Deletes a Article entity.
      *
-     * @Route("/{id}", name="admin_categorie_delete")
+     * @Route("/{id}", name="admin_article_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id) {
@@ -210,21 +208,21 @@ class CategorieController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Categorie')->find($id);
+            $entity = $em->getRepository('AppBundle:Article')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Categorie entity.');
+                throw $this->createNotFoundException('Unable to find Article entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_categorie'));
+        return $this->redirect($this->generateUrl('admin_article'));
     }
 
     /**
-     * Creates a form to delete a Categorie entity by id.
+     * Creates a form to delete a Article entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -232,9 +230,9 @@ class CategorieController extends Controller {
      */
     private function createDeleteForm($id) {
         return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('admin_categorie_delete', array('id' => $id)))
+                        ->setAction($this->generateUrl('admin_article_delete', array('id' => $id)))
                         ->setMethod('DELETE')
-                        ->add('submit', 'submit', array('label' => 'Supprimer'))
+                        ->add('submit', 'submit', array('label' => 'Delete'))
                         ->getForm()
         ;
     }

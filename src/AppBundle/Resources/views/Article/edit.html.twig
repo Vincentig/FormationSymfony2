@@ -1,0 +1,60 @@
+{% form_theme edit_form '/blog/bootstrap_3_layout.html.twig' %}
+{% extends '::layout_back.html.twig' %}
+
+
+{% block body -%}
+    {%if image is defined%}
+        <img id="image_miniature" class="img-thumbnail" width="80" src="{{asset('images/' ~ image.url)}}"/>
+    {%endif%}
+    <div class="well">
+        {{form_start(edit_form)}}
+
+        {# tout d'un coup #
+            {# {{form_widget(form)}}
+        {# ou ligne par ligne #}
+
+        {#    
+            {{ form_row(form.titre) }}<hr/>
+            {{ form_row(form.contenu) }}<hr/>
+        #}    
+
+        {# ou  #}
+        {#    <div class="form-group">
+                {{form_label(form.titre,"Titre de l'article") }}
+                <div class="col-sm-10">{{form_widget(form.titre ) }} </div>
+                {{form_errors(form.titre) }}
+            </div>#}
+        {{form_row(edit_form.titre,{ 'label' : "Titre de l'article" })}}
+
+        <div class="form-group">
+            {{form_label(edit_form.contenu,"Contenu de l'article" ) }}
+            <div class="col-sm-10">{{form_widget(edit_form.contenu, {'attr': {'class': 'ckeditor'}} )}} </div>
+            {{form_errors(edit_form.contenu) }}
+        </div>
+        {#{{ form_row(form.date) }}
+        {{ form_row(form.auteur) }}
+        {{ form_row(form.publication) }}#}
+
+        {#    {{ form_row(form.image) }}#}
+
+        {# {{form_widget(form.image) }}#}
+
+        {{ form_row(edit_form.categories) }}
+
+
+        {{form_end(edit_form)}}
+    </div>
+
+
+
+
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('admin_categorie') }}">
+                Retour à la liste
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}
