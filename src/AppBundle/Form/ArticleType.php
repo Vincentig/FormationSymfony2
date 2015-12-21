@@ -40,7 +40,7 @@ class ArticleType extends AbstractType {
 //                    }
                 ))
                 ->add('testNonMapped', TextType::class, array('required' => false, 'mapped' => false))
-                ->add('ok', SubmitType::class)
+        //  ->add('ok', SubmitType::class)
         ;
     }
 

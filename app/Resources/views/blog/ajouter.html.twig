@@ -1,6 +1,6 @@
 {% extends '::layout_back.html.twig' %}
 
-{%block stylesheet%}
+{% block stylesheet %}
     {{parent()}}
     <style>
         #appbundle_article_image_file{
@@ -10,12 +10,12 @@
             margin-right:10px;
         }
     </style>
-{%endblock%}
+{% endblock %}
 
-{%block scriptJjquery%}
+{% block scriptJjquery %}
     {{parent()}}
     $('#image_miniature').insertBefore('#appbundle_article_image_file');
-{%endblock%}
+{% endblock %}
 
 
 {% block title %}{{parent()}} - Ajouter {% endblock %}

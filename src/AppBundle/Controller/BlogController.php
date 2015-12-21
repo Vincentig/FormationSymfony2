@@ -77,6 +77,16 @@ class BlogController extends Controller {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $commentaire->setArticle($article);
+
+//                $security = $this->get('security.context');
+//                $token = $security->getToken();
+//                $user = $token->getUser();
+
+                $user = $this->getUser();
+//                var_dump($user);
+//                die;
+                $commentaire->setAuteur($user);
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($commentaire);
                 $session = $this->get('session');

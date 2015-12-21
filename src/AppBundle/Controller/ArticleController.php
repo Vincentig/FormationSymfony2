@@ -129,17 +129,21 @@ class ArticleController extends Controller {
     public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Article')->find($id);
+        $article = $em->getRepository('AppBundle:Article')->find($id);
+        //  $image = $article->getImage();
 
-        if (!$entity) {
+        if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        // var_dump($article);
+        // die;
+
+        $editForm = $this->createEditForm($article);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -182,6 +186,33 @@ class ArticleController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+
+        $image = $entity->getImage();
+
+        if ($editForm->isValid()) {
+
+
+            if ($image->getFile() !== null) {
+                $image->removeOldFile();
+                $image->upload();
+            }
+            $em = $this->getDoctrine()->getManager();
+            $session = $this->get('session');
+            try {
+                $em->flush();
+                $session->getFlashBag()->add(
+                        'info', 'Article modifié'
+                );
+                $url = $this->generateUrl('blog_article', array('id' => $entity->getId()));
+                return $this->redirect($url);
+            } catch (Exception $ex) {
+                echo 'erreur enregistrement article';
+            }
+        }
+
+
+
+
 
         if ($editForm->isValid()) {
             $em->flush();

@@ -20,20 +20,28 @@
 
 {% block title %} {{parent()}} - Blog{% endblock %}
 
-{% block menu %}
-    {{ render(controller("AppBundle:Blog:menuGauche", {'nombre':3})) }}
-{% endblock %}
+
 
 {% block body %}
 
-    {% for message in app.session.flashbag.get('info') %}
-        <p class="alert alert-success">{{message}}</p>
-    {%endfor%}
-    {% for message in app.session.flashbag.get('erreur') %}
-        <p class="alert alert-danger">{{message}}</p>
-    {%endfor%}
-    {% block contenu %}
+    <div class="col-sm-3">
+        {% block menu %}
+            {{ render(controller("AppBundle:Blog:menuGauche", {'nombre':3})) }}
+        {% endblock %}
 
-    {%endblock%}
+    </div>
+    <div class="col-sm-9">
+        {% for message in app.session.flashbag.get('info') %}
+            <p class="alert alert-success">{{message}}</p>
+        {%endfor%}
+        {% for message in app.session.flashbag.get('erreur') %}
+            <p class="alert alert-danger">{{message}}</p>
+        {%endfor%}
+        {% block contenu %}
+
+        {%endblock%}
+    </div>
+
+
 {%endblock%}
 

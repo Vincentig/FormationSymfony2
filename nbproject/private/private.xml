@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Article.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/ArticleType.php</file>
-            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/BlogController.php</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_back.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/ajouter.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/menu_gauche.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_appbundle.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/Layout.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Resources/views/Article/new.html.twig</file>
         </group>
     </open-files>
 </project-private>

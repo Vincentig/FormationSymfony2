@@ -36,19 +36,19 @@ class Commentaire {
     private $date;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="auteur", type="string", length=255)
-     */
-    private $auteur;
-
-    /**
      *
      * @var \AppBundle\Entity\Article 
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     *
+     * @var type \AppBundle\Entity\User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
+     */
+    private $auteur;
 
     function __construct() {
         $this->date = new \DateTime();
@@ -108,28 +108,6 @@ class Commentaire {
     }
 
     /**
-     * Set auteur
-     *
-     * @param string $auteur
-     *
-     * @return Commentaire
-     */
-    public function setAuteur($auteur) {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
-    /**
-     * Get auteur
-     *
-     * @return string
-     */
-    public function getAuteur() {
-        return $this->auteur;
-    }
-
-    /**
      * Set article
      *
      * @param \AppBundle\Entity\Article $article
@@ -149,6 +127,28 @@ class Commentaire {
      */
     public function getArticle() {
         return $this->article;
+    }
+
+    /**
+     * Set auteur
+     *
+     * @param \AppBundle\Entity\User $auteur
+     *
+     * @return Commentaire
+     */
+    public function setAuteur(\AppBundle\Entity\User $auteur = null) {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAuteur() {
+        return $this->auteur;
     }
 
 }

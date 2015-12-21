@@ -35,6 +35,10 @@
     </head>
 
     <body>
+        <div>
+
+
+        </div>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -53,6 +57,22 @@
                         <li  {% if 'blog' in   app.request.pathInfo|split('/',3)%}class="active" {%endif%}><a href="{{ path('blog_homepage') }} ">Blog</a></li>
                         <li {% if 'catalogue' in   app.request.pathInfo|split('/',3)%}class="active" {%endif%}><a href="{{ path('catalogue_homepage') }}">Catalogue</a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{ path('admin_homepage') }}">Admin</a></li>
+                                {% endif %}
+                            <li><a href="{{ path('fos_user_profile_show') }}">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}  </a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a> </li>
+                            {% else %}
+                            <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a> </li>
+                            {% endif %}
+
+
+                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
@@ -65,41 +85,38 @@
                 </div>
             </header>
             <div class="row">
-                <div class="col-sm-3">
-                {% block menu %}{% endblock %}
-
-            </div>
-            <div class="col-sm-9">
             {% block body %}{% endblock %}
+
+
+
         </div>
-    </div>
 
-    <footer id="footer">@ {{ 'now'|date('Y') }} VB </footer>
-</div><!-- /.container -->
+        <footer id="footer">@ {{ 'now'|date('Y') }} VB </footer>
+    </div><!-- /.container -->
 
-<span id="top-link-block">
-    <a href="#top" class="well well-sm">
-        <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
-    </a>
-</span>
+    <span id="top-link-block">
+        <a href="#top" class="well well-sm">
+            <i class="glyphicon glyphicon-chevron-up"></i> Back to Top
+        </a>
+    </span>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="//cdn.ckeditor.com/4.5.5/basic/ckeditor.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-{%block scriptJjquery%}{% endblock %}
-    });
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.5.5/basic/ckeditor.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+    {%block scriptJjquery%}{% endblock %}
+        });
 
-    $('#top-link-block').affix({
-        offset: {
-            top: 82, // point were link should start sliding into view
-            bottom: $(document).height() - 100 // link should "pin" to bottom
-        }
-    });
+        $('#top-link-block').affix({
+            offset: {
+                top: 82, // point were link should start sliding into view
+                bottom: $(document).height() - 100 // link should "pin" to bottom
+            }
+        });
 </script>
 
 </body>
