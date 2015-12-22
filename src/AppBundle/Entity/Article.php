@@ -54,7 +54,7 @@ class Article {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateModification", type="datetime")
+     * @ORM\Column(name="dateModification", type="datetime", nullable=true)
      * 
      */
     private $dateModification;

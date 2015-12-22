@@ -47,6 +47,8 @@ class ArticleController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $image = $entity->getImage();
+            $image->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -196,6 +198,7 @@ class ArticleController extends Controller {
                 $image->removeOldFile();
                 $image->upload();
             }
+
             $em = $this->getDoctrine()->getManager();
             $session = $this->get('session');
             try {

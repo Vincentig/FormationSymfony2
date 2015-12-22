@@ -13,7 +13,8 @@
             <hr/>   <h3><a href="{{ path('blog_article', {'id':article.id}) }}" >{{article.titre}}</a></h3>
             <p class="well">
                 {% if article.image is not null %}
-                    <img src="{{asset('images/' ~ article.image.url)}}" alt="{{article.image.alt}}" />
+
+                    <img src="{{('images/' ~ article.image.url) | imagine_filter('my_thumb_280')}}" alt="{{article.image.alt}}" />
                 {%endif%}
                 {#                {{article.extrait|raw}}#}
                 {{extrait(article.contenu)}}

@@ -19,3 +19,18 @@ services:
             [ "%mode_maintenance%", @templating ]
         tags:
             - {name: kernel.event_listener, event: kernel.response, method: onKernelResponse}
+            
+    appbundle_user.registration.form.type:
+        class: AppBundle\Form\UserType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - {name: form.type, alias: appbundle_user }
+            
+
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main } # The alias is what is used to retrieve the menu
+
+                

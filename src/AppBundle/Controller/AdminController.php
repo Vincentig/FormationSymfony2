@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * Categorie controller.
  *
  * @Route("/admin")
+ * 
+ * 
  */
 class AdminController extends Controller {
 
@@ -20,6 +22,7 @@ class AdminController extends Controller {
      *
      * @Route("/", name="admin_homepage")
      * @Method("GET")
+     * 
      */
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();

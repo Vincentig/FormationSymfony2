@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * prefix blog
@@ -24,6 +25,7 @@ class BlogController extends Controller {
      *      name="blog_homepage", 
      *      defaults={"page":1}, 
      *      requirements={"page": "\d+"})
+     * @Secure(roles="ROLE_ADMIN, ROLE_USER")
      */
     public function indexAction($page) {
 

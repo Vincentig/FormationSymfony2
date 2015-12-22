@@ -38,7 +38,7 @@ class Commentaire {
     /**
      *
      * @var \AppBundle\Entity\Article 
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="commentaires")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;

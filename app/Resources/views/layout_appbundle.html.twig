@@ -26,7 +26,14 @@
 
     <div class="col-sm-3">
         {% block menu %}
-            {{ render(controller("AppBundle:Blog:menuGauche", {'nombre':3})) }}
+            {#            {{ render(controller("AppBundle:Blog:menuGauche", {'nombre':3})) }}#}
+            <div class="navbar">
+                <div class="navbar-inner">
+
+                    {{ knp_menu_render('main', {'currentClass': 'active'}) }}
+                </div>
+            </div>
+
         {% endblock %}
 
     </div>
