@@ -11,7 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Categorie controller.
  *
- * @Route("/admin")
+ * @Route("/{_locale}/admin",
+ * defaults={"_locale": "fr"}, 
+ *  requirements={"_locale": "en|fr"}))
  * 
  * 
  */

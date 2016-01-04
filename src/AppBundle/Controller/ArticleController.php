@@ -13,7 +13,8 @@ use AppBundle\Form\ArticleType;
 /**
  * Article controller.
  *
- * @Route("/admin/article")
+ * @Route("/{_locale}/admin/article",defaults={"_locale": "fr"}, 
+ *  requirements={"_locale": "en|fr"}))
  */
 class ArticleController extends Controller {
 

@@ -3,12 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_back.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/ajouter.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/blog/menu_gauche.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Image.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/UserType.php</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Form/Type/ChangePasswordFormType.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/ArticleController.php</file>
+            <file>file:/C:/wamp/www/symfony/composer.json</file>
+            <file>file:/C:/wamp/www/symfony/app/config/security.yml</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/CategorieController.php</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Menu/MenuBuilder.php</file>
             <file>file:/C:/wamp/www/symfony/app/Resources/views/layout_appbundle.html.twig</file>
-            <file>file:/C:/wamp/www/symfony/app/Resources/views/Layout.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Model/User.php</file>
+            <file>file:/C:/wamp/www/symfony/app/config/config.yml</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Article.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/User.php</file>
             <file>file:/C:/wamp/www/symfony/src/AppBundle/Resources/views/Article/new.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/BlogController.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Commentaire.php</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Entity/Categorie.php</file>
+            <file>file:/C:/wamp/www/symfony/app/config/routing.yml</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Controller/AdminController.php</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/checkEmail.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/src/AppBundle/Form/ImageType.php</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/AppKernel.php</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Form/Type/RegistrationFormType.php</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/menu/knp_menu.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register_content.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/config/services.yml</file>
+            <file>file:/C:/wamp/www/symfony/vendor/friendsofsymfony/user-bundle/Resources/views/Profile/edit_content.html.twig</file>
+            <file>file:/C:/wamp/www/symfony/app/Resources/views/Layout.html.twig</file>
         </group>
     </open-files>
 </project-private>

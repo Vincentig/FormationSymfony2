@@ -1,0 +1,13 @@
+{% extends "::layout_appbundle.html.twig" %}
+
+
+
+{% block title %}{{parent()}} - Traduction {% endblock %}
+
+{% block contenu %}
+    <h1>{{ 'message.accueil'|trans({'%nom%': nom}) }} </h1>
+    <h2>{{ 'message.pluriel'|transchoice(1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, {'%nom%' : nom}) }}</h2>
+    <h2>{{ 'message.pluriel'|transchoice(0, {'%nom%' : nom}) }}</h2>
+    <h2>{{ 'message.pluriel'|transchoice(1, {'%nom%' : nom}) }}</h2>
+    <h2>{{ 'message.pluriel'|transchoice(10, {'%nom%' : nom}) }}</h2>
+{% endblock %}

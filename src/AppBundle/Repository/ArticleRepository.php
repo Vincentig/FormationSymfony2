@@ -47,8 +47,8 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository {
                 ->addSelect('c')
                 ->Where('a.publication = :publication')
                 ->setParameter('publication', 1)
-                ->andWhere('a.date >= :annee')
-                ->setParameter('annee', $annee)
+//                ->andWhere('a.date >= :annee')
+//                ->setParameter('annee', $annee)
                 ->orderBy('a.date', 'DESC')
                 ->setFirstResult(($page - 1) * $nbParPage)
                 ->setMaxResults($nbParPage);

@@ -8,14 +8,18 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class MenuBuilder {
 
     private $factory;
+    private $trad;
+    private $doctrine;
 
     /**
      * @param FactoryInterface $factory
      *
      * Add any other dependency you need
      */
-    public function __construct(FactoryInterface $factory) {
+    public function __construct(FactoryInterface $factory, $doctrine, $trad) {
         $this->factory = $factory;
+        $this->trad = $trad;
+        $this->doctrine = $doctrine;
     }
 
 //    public function createMainMenu(FactoryInterface $factory, array $options) {
@@ -32,14 +36,31 @@ class MenuBuilder {
 
     public function createMainMenu(array $options) {
         $menu = $this->factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav navbar-nav');
+        $menu->setChildrenAttribute('class', 'nav nav-pills nav-stacked');
 
-        $menu->addChild('Index', array('route' => 'blog_homepage'))
+        $index = $this->trad->trans('menu.index');
+        $menu->addChild($index, array('route' => 'blog_homepage'))
                 ->setAttribute('icon', 'glyphicon glyphicon-list');
 
-        $menu->addChild('Admin', array('route' => 'admin_homepage'))
+        $admin = $this->trad->trans('menu.admin');
+        $menu->addChild($admin, array('route' => 'admin_homepage'))
                 ->setAttribute('icon', 'glyphicon glyphicon-list');
 
+        $sousMenu = $this->trad->trans('menu.sous_menu');
+        $menu[$admin]->addChild($sousMenu);
+
+
+        $articleManager = $this->doctrine->getManager()->getRepository('AppBundle:Article');
+
+        $articles = $articleManager->findBy(array(), array('date' => 'desc'), 3, 0);
+
+
+
+        foreach ($articles as $article) {
+            $menu->addChild($article->getId(), array('label' => $article->getTitre(), 'route' => 'blog_article',
+                'routeParameters' => array('id' => $article->getId())))
+            ;
+        }
 
         // ... add more children
 

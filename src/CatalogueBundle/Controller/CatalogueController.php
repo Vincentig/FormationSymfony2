@@ -9,7 +9,7 @@ use \CatalogueBundle\Entity\Image;
 
 /**
  * prefix catalogue
- * @Route("/catalogue")
+
  */
 class CatalogueController extends Controller {
 

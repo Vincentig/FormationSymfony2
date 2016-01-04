@@ -1,0 +1,12 @@
+Hello: Bonjour
+
+message: 
+    accueil: Bonjour %nom% !
+    pluriel: "{0} Il y a aucun %nom%.|{1} Il y a %count% %nom%.|]1, +Inf]Il y a %count% %nom%s, c'est beaucoup !"
+    
+menu: 
+    catalogue: catalogue
+    blog: blog
+    index: accueil
+    admin: administration
+    sous_menu: Sous menu

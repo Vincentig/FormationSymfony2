@@ -16,7 +16,12 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * prefix blog
- * @Route("/blog")
+ * @Route("/{_locale}/blog",
+ *  defaults={"_locale": "fr"}, 
+ *  requirements={"_locale": "en|fr"}))
+ * 
+
+ * 
  */
 class BlogController extends Controller {
 
@@ -40,11 +45,13 @@ class BlogController extends Controller {
                 ->getRepository('AppBundle:Article')
                 ->getArticles($nbParPage, $page);
         $extrait = $this->get('app_extrait');
-        foreach ($articles as $key => $article) {
-            $article->setExtrait($extrait->extraire($article->getContenu()));
-        }
-
+        /* foreach ($articles as $key => $article) {
+          $article->setExtrait($extrait->extraire($article->getContenu()));
+          }
+         */
         $nbPages = ceil(count($articles) / $nbParPage);
+
+        var_dump(count($articles));
 
         // $articles = $articleManager->getArticles();
 //        $articles = [
@@ -52,6 +59,7 @@ class BlogController extends Controller {
 //            ['id' => 2, 'titre' => 'L\'autre titre', 'contenu' => 'le contenu de l\autre article'],
 //            ['id' => 3, 'titre' => 'Le dernier titre', 'contenu' => 'le  dernier contenu du dernier article']
 //        ];
+//        var_dump($articles);
 
         return $this->render('blog/index.html.twig', array(
                     'articles' => $articles,
@@ -354,6 +362,19 @@ class BlogController extends Controller {
                     'categorie' => $categorie,
                     'page' => $page,
                     'nbPage' => $nbPages
+        ));
+    }
+
+    /**
+     * @Route("/traduction/{nom}",
+     *      name="blog_traduction", 
+     *  )
+     */
+    public function traduction($nom) {
+
+
+        return $this->render('blog/traduction.html.twig', array(
+                    'nom' => $nom
         ));
     }
 

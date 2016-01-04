@@ -1,0 +1,13 @@
+Bonjour: Hello
+
+message: 
+    accueil: Hello %nom%!
+    pluriel: "{0} There is no %nom%.|{1} There is %count% %nom%.|]1, +Inf]There are %count% %nom%s, it is huge !"
+
+menu: 
+    catalogue: cat
+    blog: blog
+    index: index
+    admin: admin
+    sous_menu: sub menu
+
